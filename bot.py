@@ -18,7 +18,7 @@ source_channel = config("SOURCE_CHANNEL")
 destination_bot_username = config("TO_BOT_USERNAME")
 
 # Create Pyrogram Client using session string
-app = Client(session_string, api_id=api_id, api_hash=api_hash)
+app = Client(session_string=SESSION, api_id=api_id, api_hash=api_hash)
 # Function to forward messages from the source channel to the bot
 @app.on_message(filters.chat(source_channel))
 async def forward_messages(client, message):

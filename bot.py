@@ -1,5 +1,4 @@
 import uvloop
-import asyncio
 from pyrogram import Client, filters
 from decouple import config
 
@@ -8,19 +7,15 @@ print("Starting...")
 # Install uvloop for faster event loops
 uvloop.install()
 
-# Replace with your session string, API ID, and API Hash
-session_string = config("SESSION")
-api_id = config("APP_ID", cast=int)
-api_hash = config("API_HASH")
-
-# Replace with your source channel username or ID
-source_channel = config("SOURCE_CHANNEL")
-
-# Replace with your bot's username (the bot must be added to your chat list)
-destination_bot_username = config("TO_BOT_USERNAME")
+# Read configurations from environment variables
+session_string = config("SESSION")  # Session string
+api_id = config("APP_ID", cast=int)  # API ID
+api_hash = config("API_HASH")  # API Hash
+source_channel = config("SOURCE_CHANNEL")  # Source channel username or ID
+destination_bot_username = config("TO_BOT_USERNAME")  # Destination bot username
 
 # Create Pyrogram Client using session string
-app = Client(session_name=session_string, api_id=api_id, api_hash=api_hash)
+app = Client(session_string, api_id=api_id, api_hash=api_hash)
 
 # Function to forward messages from the source channel to the bot
 @app.on_message(filters.chat(source_channel))

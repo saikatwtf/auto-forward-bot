@@ -25,16 +25,12 @@ async def start_bot():
 # Function to forward messages from the source channel to the bot
 @app.on_message(filters.chat(source_channel))
 async def forward_messages(client, message):
-    for i in TO_BOT_USERNAME:
-        try:
-            await client.copy_message(
-                chat_id=i,
-                from_chat_id=message.chat.id,
-                message_id=message.id,
-                caption=message.caption,
-                caption_entities=message.caption_entities,
-                reply_markup=message.reply_markup
-            )
- except Exception as e:
+    try:
+        # Forward the message to the bot
+        await message.forward(TO_BOT_USERNAME)
+        print(f"Message forwarded: {message.message_id}")
+    except Exception as e:
         print(f"Failed to forward message {message.message_id}: {e}")
+
+# Run the client
 app.run(start_bot())

@@ -14,17 +14,8 @@ source_channel = config("SOURCE_CHANNEL")  # Source channel username or ID
 destination_bot_username = config("TO_BOT_USERNAME")  # Destination bot username
 
 # Create Pyrogram Client using StringSession
-app = Client(name=SESSION, api_id=APP_ID, api_hash=API_HASH, session_string=SESSION)
-except Exception as ap:
-    print(f"ERROR - {ap}")
-    exit(1)
+app = Client(session_string=SESSION, api_id=api_id, api_hash=api_hash)
 
-async def start_bot():
-    await app.start()
-    user = await app.get_me()
-    print(f"Logged in as : {user.first_name}")
-
-    await asyncio.Event().wait()
 # Function to forward messages from the source channel to the bot
 @app.on_message(filters.chat(source_channel))
 async def forward_messages(client: Client, message: Message):
@@ -36,4 +27,4 @@ async def forward_messages(client: Client, message: Message):
         print(f"Failed to forward message {message.message_id}: {e}")
 
 # Run the client
-app.run(start_bot())
+app.run()

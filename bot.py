@@ -11,7 +11,7 @@ SESSION = config("SESSION")  # Session string
 api_id = config("APP_ID", cast=int)  # API ID
 api_hash = config("API_HASH")  # API Hash
 source_channel = config("SOURCE_CHANNEL")  # Source channel username or ID
-destination_bot_username = config("TO_BOT_USERNAME")  # Destination bot username
+TO_BOT_USERNAME = config("TO_BOT_USERNAME")  # Destination bot username
 
 # Create Pyrogram Client using StringSession
 app = Client(name=SESSION, session_string=SESSION, api_id=api_id, api_hash=api_hash)
@@ -19,7 +19,7 @@ app = Client(name=SESSION, session_string=SESSION, api_id=api_id, api_hash=api_h
 # Function to forward messages from the source channel to the bot
 @app.on_message(filters.chat(source_channel))
 async def forward_messages(client, message):
-    for i in destination_bot_username:
+    for i in TO_BOT_USERNAME:
         try:
             await client.copy_message(
                 chat_id=i,

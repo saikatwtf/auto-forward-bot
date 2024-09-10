@@ -5,12 +5,14 @@ from decouple import config
 
 print("Starting...")
 
+# Install uvloop for faster event loops
 uvloop.install()
 
 # Replace with your session string, API ID, and API Hash
 session_string = config("SESSION")
-api_id = config("APP_ID", default=None, cast=int)
-api_hash = config("API_HASH", default=None)
+api_id = config("APP_ID", cast=int)
+api_hash = config("API_HASH")
+
 # Replace with your source channel username or ID
 source_channel = config("SOURCE_CHANNEL")
 
@@ -18,7 +20,8 @@ source_channel = config("SOURCE_CHANNEL")
 destination_bot_username = config("TO_BOT_USERNAME")
 
 # Create Pyrogram Client using session string
-app = Client(session_string=SESSION, api_id=api_id, api_hash=api_hash)
+app = Client(session_name=session_string, api_id=api_id, api_hash=api_hash)
+
 # Function to forward messages from the source channel to the bot
 @app.on_message(filters.chat(source_channel))
 async def forward_messages(client, message):
@@ -30,4 +33,5 @@ async def forward_messages(client, message):
         print(f"Failed to forward message {message.message_id}: {e}")
 
 # Run the client
-app.run()
+if __name__ == "__main__":
+    app.run()

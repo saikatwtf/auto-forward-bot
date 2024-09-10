@@ -32,4 +32,4 @@ async def forward_messages(client, message):
         except Exception as e:
             print(e)
 
-app.run(start_bot())
+app.run()

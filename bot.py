@@ -36,6 +36,5 @@ async def forward_messages(client, message):
                 reply_markup=message.reply_markup
             )
  except Exception as e:
-            print(e)
-
+        print(f"Failed to forward message {message.message_id}: {e}")
 app.run(start_bot())

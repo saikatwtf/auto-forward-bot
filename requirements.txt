@@ -1,0 +1,7 @@
+https://codeload.github.com/KurimuzonAkuma/pyrogram/zip/refs/heads/dev
+tgcrypto
+uvloop
+python-decouple
+Flask
+gunicorn
+aiohttp

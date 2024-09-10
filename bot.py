@@ -19,10 +19,6 @@ destination_bot_username = config("TO_BOT_USERNAME")
 
 # Create Pyrogram Client using session string
 app = Client(name=SESSION, api_id=APP_ID, api_hash=API_HASH, session_string=SESSION)
-except Exception as ap:
-    print(f"ERROR - {ap}")
-    exit(1)
-
 
 # Function to forward messages from the source channel to the bot
 @app.on_message(filters.chat(source_channel))

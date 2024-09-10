@@ -1,7 +1,7 @@
 import uvloop
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from pyrogram import StringSession  # Corrected import for StringSession
+from pyrogram.client.types import StringSession  # Correct import for StringSession
 from decouple import config
 
 print("Starting...")

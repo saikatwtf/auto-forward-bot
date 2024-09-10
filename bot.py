@@ -1,5 +1,7 @@
 import uvloop
 from pyrogram import Client, filters
+from pyrogram.types import Message
+from pyrogram.session import StringSession
 from decouple import config
 
 print("Starting...")
@@ -14,12 +16,12 @@ api_hash = config("API_HASH")  # API Hash
 source_channel = config("SOURCE_CHANNEL")  # Source channel username or ID
 destination_bot_username = config("TO_BOT_USERNAME")  # Destination bot username
 
-# Create Pyrogram Client using session string
-app = Client(session_string, api_id=api_id, api_hash=api_hash)
+# Create Pyrogram Client using StringSession
+app = Client(StringSession(session_string), api_id=api_id, api_hash=api_hash)
 
 # Function to forward messages from the source channel to the bot
 @app.on_message(filters.chat(source_channel))
-async def forward_messages(client, message):
+async def forward_messages(client: Client, message: Message):
     try:
         # Forward the message to the bot
         await message.forward(destination_bot_username)
